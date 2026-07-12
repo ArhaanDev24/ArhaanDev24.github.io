@@ -155,7 +155,7 @@ a { color: inherit; text-decoration: none; }
   border-top: 1px dashed var(--line); padding-top: 14px;
   display: flex; gap: 12px; align-items: baseline; min-height: 38px;
 }
-.explain-label { text-transform: uppercase; letter-spacing: .12em; font-size: .62rem; flex-shrink: 0; }
+.explain-label { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; flex-shrink: 0; }
 .explain-text { color: var(--muted); }
 
 /* click ping */
@@ -192,7 +192,7 @@ a { color: inherit; text-decoration: none; }
 .file:hover, .file.active { border-color: var(--accent); }
 .term-log {
   background: #0d0d0f; border: 1px solid var(--line); border-radius: 8px;
-  padding: 14px; min-height: 150px; font-size: .72rem; line-height: 1.9; overflow: hidden;
+  padding: 14px; min-height: 150px; font-size: .75rem; line-height: 1.9; overflow: hidden;
 }
 .term-log .ok { color: var(--accent); }
 .term-log div { opacity: 0; }
@@ -255,7 +255,7 @@ a { color: inherit; text-decoration: none; }
 .hil-side { display: flex; flex-direction: column; gap: 12px; }
 .hil-log {
   flex: 1; background: #0d0d0f; border: 1px solid var(--line); border-radius: 8px;
-  padding: 12px; font-size: .68rem; line-height: 1.9; overflow: hidden;
+  padding: 12px; font-size: .75rem; line-height: 1.9; overflow: hidden;
 }
 .hil-log .warn { color: var(--danger); }
 .hil-log .ok { color: var(--accent); }
@@ -277,7 +277,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute; left: 0; right: 0; top: 0; height: 2px;
   background: var(--accent); box-shadow: 0 0 14px var(--accent); opacity: 0;
 }
-.eco-result { min-height: 34px; text-align: center; color: var(--accent); font-size: .68rem; line-height: 1.5; }
+.eco-result { min-height: 34px; text-align: center; color: var(--accent); font-size: .75rem; line-height: 1.5; }
 .eco-controls { display: flex; gap: 8px; justify-content: center; }
 
 /* ============ demo: jira ============ */
@@ -294,7 +294,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 8px; padding: 10px 12px; transition: border-color .2s;
 }
 .jira-input:focus { outline: none; border-color: var(--accent); }
-.jira-saved { opacity: 0; font-size: .68rem; }
+.jira-saved { opacity: 0; font-size: .75rem; }
 
 /* ============ clockwork timeline ============ */
 .clockwork { position: relative; max-width: 920px; margin: 0 auto; padding: 56px 0 8px; }
@@ -329,12 +329,12 @@ a { color: inherit; text-decoration: none; }
 }
 .cw-card h3 { font-size: 1.1rem; font-weight: 600; margin: 8px 0 4px; }
 .cw-card p { color: var(--muted); font-size: .9rem; margin-bottom: 8px; }
-.cw-card .mono.accent { letter-spacing: .1em; text-transform: uppercase; font-size: .68rem; }
+.cw-card .mono.accent { letter-spacing: .1em; text-transform: uppercase; font-size: .75rem; }
 
 /* ============ about ============ */
 .about-big { font-size: clamp(24px, 3.4vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 980px; font-weight: 500; }
 .about-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
-.about-cols h3 { margin-bottom: 10px; text-transform: uppercase; letter-spacing: .12em; font-size: .62rem; font-weight: 500; }
+.about-cols h3 { margin-bottom: 10px; text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 500; }
 .about-cols p { color: var(--text); font-size: .95rem; }
 
 /* ============ timeline ============ */
