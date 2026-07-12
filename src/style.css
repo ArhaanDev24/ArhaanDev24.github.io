@@ -119,8 +119,8 @@ a { color: inherit; text-decoration: none; }
 .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 44px; flex-wrap: wrap; }
 .section-hint { color: var(--muted); max-width: 480px; text-align: right; }
 
-/* reveal states (animated in via anime.js) */
-.reveal, .reveal-now { opacity: 0; }
+/* reveal states (animated in via anime.js) — only hidden when JS is running */
+.js .reveal, .js .reveal-now { opacity: 0; }
 
 /* ============ cards ============ */
 .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }

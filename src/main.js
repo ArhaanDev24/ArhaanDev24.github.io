@@ -1,6 +1,9 @@
 import { animate, stagger, createTimeline } from 'animejs';
 import { initDemos } from './demos.js';
 
+// mark JS as available: reveal-hiding styles only apply under .js
+document.documentElement.classList.replace('no-js', 'js');
+
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const CAN_HOVER = window.matchMedia('(hover: hover)').matches;
 
