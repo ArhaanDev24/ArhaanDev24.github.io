@@ -19,6 +19,8 @@ window.addEventListener('pointermove', (e) => {
   dot.style.top = `${pos.y}px`;
   requestAnimationFrame(cursorLoop);
 })();
+window.addEventListener('pointerdown', () => dot.classList.add('down'));
+window.addEventListener('pointerup', () => dot.classList.remove('down'));
 
 /* ---------- hero: split letters + intro timeline ---------- */
 document.querySelectorAll('[data-split]').forEach((el) => {
@@ -50,6 +52,83 @@ animate('.hero-cta .arrow', {
   ease: 'inOutQuad',
 });
 
+// "open to work" dot pulses forever
+animate('.hero-kicker .accent', {
+  scale: [1, 1.45],
+  opacity: [1, 0.4],
+  duration: 900,
+  alternate: true,
+  loop: true,
+  ease: 'inOutSine',
+});
+
+/* ---------- hero letters: bounce on hover ---------- */
+document.querySelectorAll('.hero-title .char').forEach((c) => {
+  c.addEventListener('mouseenter', () => {
+    if (c.dataset.busy) return;
+    c.dataset.busy = '1';
+    animate(c, {
+      translateY: [
+        { to: -16, duration: 150, ease: 'outQuad' },
+        { to: 0, duration: 650, ease: 'outElastic(1, .4)' },
+      ],
+      onComplete: () => delete c.dataset.busy,
+    });
+  });
+});
+
+/* ---------- hero parallax + scroll progress ---------- */
+const heroTitle = document.querySelector('.hero-title');
+const progress = document.querySelector('.scroll-progress');
+window.addEventListener(
+  'scroll',
+  () => {
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (y <= window.innerHeight) {
+      heroTitle.style.transform = `translateY(${y * 0.18}px)`;
+      heroTitle.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.9));
+    }
+  },
+  { passive: true }
+);
+
+/* ---------- magnetic buttons ---------- */
+function magnetize(el, strength = 0.3) {
+  el.addEventListener('pointermove', (e) => {
+    const r = el.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+  });
+  el.addEventListener('pointerleave', () => {
+    animate(el, { translateX: 0, translateY: 0, duration: 550, ease: 'outElastic(1, .5)' });
+  });
+}
+document.querySelectorAll('.btn, .hero-cta, .ext-icon').forEach((el) => magnetize(el));
+
+/* ---------- footer email: letters rise from the center ---------- */
+const mail = document.querySelector('.footer-mail');
+mail.innerHTML = [...mail.textContent]
+  .map((c) => `<span class="char" style="opacity:0">${c}</span>`)
+  .join('');
+const mailChars = mail.querySelectorAll('.char');
+new IntersectionObserver(
+  (entries, obs) => {
+    if (!entries[0].isIntersecting) return;
+    obs.disconnect();
+    animate(mailChars, {
+      opacity: [0, 1],
+      translateY: [30, 0],
+      duration: 850,
+      ease: 'outExpo',
+      delay: stagger(16, { from: 'center' }),
+    });
+  },
+  { threshold: 0.4 }
+).observe(mail);
+
 /* ---------- marquee: duplicate content so -50% loops seamlessly ---------- */
 const track = document.querySelector('.marquee-track');
 track.innerHTML += track.innerHTML;
@@ -65,6 +144,8 @@ const io = new IntersectionObserver(
         translateY: [36, 0],
         duration: 900,
         ease: 'outExpo',
+        // clear the inline transform so the CSS :hover lift on cards can take over
+        onComplete: () => (entry.target.style.transform = ''),
       });
     }
   },
