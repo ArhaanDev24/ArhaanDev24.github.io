@@ -137,7 +137,9 @@ function magnetize(el, strength = 0.3) {
     animate(el, { translateX: 0, translateY: 0, duration: 550, ease: 'outElastic(1, .5)' });
   });
 }
-document.querySelectorAll('.btn, .hero-cta, .ext-icon').forEach((el) => magnetize(el));
+// touch devices: pointermove would drag the button away from the finger mid-tap
+if (!REDUCED_MOTION && CAN_HOVER)
+  document.querySelectorAll('.btn, .hero-cta, .ext-icon').forEach((el) => magnetize(el));
 
 /* ---------- footer email: letters rise from the center ---------- */
 if (!REDUCED_MOTION) {
