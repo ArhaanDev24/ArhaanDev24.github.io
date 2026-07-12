@@ -293,6 +293,41 @@ a { color: inherit; text-decoration: none; }
 .jira-input:focus { border-color: var(--accent); }
 .jira-saved { opacity: 0; font-size: .68rem; }
 
+/* ============ clockwork timeline ============ */
+.clockwork { position: relative; max-width: 920px; margin: 0 auto; padding: 56px 0 8px; }
+.cw-gear { position: absolute; top: -2px; left: 50%; width: 46px; height: 46px; transform: translateX(-50%); z-index: 3; }
+.cw-gear path, .cw-gear circle { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.cw-gear-rotor { transform-origin: center; transform-box: fill-box; }
+.cw-track, .cw-fill {
+  position: absolute; top: 48px; left: 50%; width: 1px; transform: translateX(-50%);
+}
+.cw-track { bottom: 0; background: var(--line); }
+.cw-fill { height: 0; width: 2px; background: var(--accent); box-shadow: 0 0 10px rgba(216,255,62,.5); z-index: 1; }
+.cw-runner {
+  position: absolute; top: 48px; left: 50%; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); transform: translate(-50%, -50%); z-index: 2;
+  box-shadow: 0 0 14px var(--accent);
+}
+.cw-item { position: relative; width: 50%; padding: 0 44px 52px 0; text-align: right; }
+.cw-item:nth-child(even) { margin-left: 50%; padding: 0 0 52px 44px; text-align: left; }
+.cw-node {
+  position: absolute; top: 5px; width: 11px; height: 11px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--accent); z-index: 2;
+}
+.cw-item:nth-child(odd) .cw-node { right: -7px; }
+.cw-item:nth-child(even) .cw-node { left: -7px; }
+.cw-node::after {
+  content: ''; position: absolute; inset: -7px; border-radius: 50%;
+  border: 1px solid var(--accent); opacity: 0; animation: cwping 3s ease-out infinite;
+}
+@keyframes cwping {
+  0% { transform: scale(.4); opacity: .8; }
+  70%, 100% { transform: scale(1.4); opacity: 0; }
+}
+.cw-card h3 { font-size: 1.1rem; font-weight: 600; margin: 8px 0 4px; }
+.cw-card p { color: var(--muted); font-size: .9rem; margin-bottom: 8px; }
+.cw-card .mono.accent { letter-spacing: .1em; text-transform: uppercase; font-size: .68rem; }
+
 /* ============ about ============ */
 .about-big { font-size: clamp(24px, 3.4vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 980px; font-weight: 500; }
 .about-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
@@ -332,4 +367,10 @@ a { color: inherit; text-decoration: none; }
   .nav-links { gap: 16px; }
   .term { grid-template-columns: 1fr; }
   .term-files { flex-direction: row; flex-wrap: wrap; }
+  .cw-gear, .cw-track, .cw-fill, .cw-runner { left: 14px; }
+  .cw-gear { width: 36px; height: 36px; }
+  .cw-item, .cw-item:nth-child(even) {
+    width: 100%; margin-left: 0; padding: 0 0 44px 42px; text-align: left;
+  }
+  .cw-item:nth-child(odd) .cw-node, .cw-item:nth-child(even) .cw-node { left: 8px; right: auto; }
 }

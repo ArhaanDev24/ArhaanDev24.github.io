@@ -94,6 +94,26 @@ window.addEventListener(
   { passive: true }
 );
 
+/* ---------- clockwork timeline: line draws, gear turns, runner rides ---------- */
+const cw = document.getElementById('clockwork');
+if (cw) {
+  const fill = cw.querySelector('.cw-fill');
+  const runner = cw.querySelector('.cw-runner');
+  const rotor = cw.querySelector('.cw-gear-rotor');
+  const TRACK_TOP = 48;
+  const updateClockwork = () => {
+    const r = cw.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (window.innerHeight * 0.55 - r.top) / r.height));
+    const trackH = r.height - TRACK_TOP;
+    fill.style.height = `${p * trackH}px`;
+    runner.style.top = `${TRACK_TOP + p * trackH}px`;
+    rotor.style.transform = `rotate(${p * 540}deg)`;
+  };
+  window.addEventListener('scroll', updateClockwork, { passive: true });
+  window.addEventListener('resize', updateClockwork, { passive: true });
+  updateClockwork();
+}
+
 /* ---------- magnetic buttons ---------- */
 function magnetize(el, strength = 0.3) {
   el.addEventListener('pointermove', (e) => {
