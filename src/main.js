@@ -1,6 +1,9 @@
 import { animate, stagger, createTimeline } from 'animejs';
 import { initDemos } from './demos.js';
 
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const CAN_HOVER = window.matchMedia('(hover: hover)').matches;
+
 /* ---------- custom cursor ---------- */
 const dot = document.querySelector('.cursor-dot');
 const mouse = { x: -100, y: -100 };
@@ -29,41 +32,46 @@ document.querySelectorAll('[data-split]').forEach((el) => {
     .join('');
 });
 
-const intro = createTimeline({ defaults: { ease: 'outExpo' } });
-intro
-  .add('.hero-title .char', {
-    translateY: ['110%', '0%'],
-    duration: 1100,
-    delay: stagger(45),
-  })
-  .add('.reveal-now', {
-    opacity: [0, 1],
-    translateY: [24, 0],
-    duration: 800,
-    delay: stagger(120),
-  }, '-=700');
+if (REDUCED_MOTION) {
+  // no entrance motion: everything simply visible
+  document.querySelectorAll('.reveal, .reveal-now').forEach((el) => (el.style.opacity = 1));
+} else {
+  const intro = createTimeline({ defaults: { ease: 'outExpo' } });
+  intro
+    .add('.hero-title .char', {
+      translateY: ['110%', '0%'],
+      duration: 1100,
+      delay: stagger(45),
+    })
+    .add('.reveal-now', {
+      opacity: [0, 1],
+      translateY: [24, 0],
+      duration: 800,
+      delay: stagger(120),
+    }, '-=700');
 
-// gently bob the CTA arrow forever
-animate('.hero-cta .arrow', {
-  translateY: [0, 5],
-  duration: 700,
-  alternate: true,
-  loop: true,
-  ease: 'inOutQuad',
-});
+  // gently bob the CTA arrow forever
+  animate('.hero-cta .arrow', {
+    translateY: [0, 5],
+    duration: 700,
+    alternate: true,
+    loop: true,
+    ease: 'inOutQuad',
+  });
 
-// "open to work" dot pulses forever
-animate('.hero-kicker .accent', {
-  scale: [1, 1.45],
-  opacity: [1, 0.4],
-  duration: 900,
-  alternate: true,
-  loop: true,
-  ease: 'inOutSine',
-});
+  // "open to work" dot pulses forever
+  animate('.hero-kicker .accent', {
+    scale: [1, 1.45],
+    opacity: [1, 0.4],
+    duration: 900,
+    alternate: true,
+    loop: true,
+    ease: 'inOutSine',
+  });
+}
 
 /* ---------- hero letters: bounce on hover ---------- */
-document.querySelectorAll('.hero-title .char').forEach((c) => {
+if (!REDUCED_MOTION && CAN_HOVER) document.querySelectorAll('.hero-title .char').forEach((c) => {
   c.addEventListener('mouseenter', () => {
     if (c.dataset.busy) return;
     c.dataset.busy = '1';
@@ -86,7 +94,7 @@ window.addEventListener(
     const y = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-    if (y <= window.innerHeight) {
+    if (!REDUCED_MOTION && y <= window.innerHeight) {
       heroTitle.style.transform = `translateY(${y * 0.18}px)`;
       heroTitle.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.9));
     }
@@ -129,49 +137,53 @@ function magnetize(el, strength = 0.3) {
 document.querySelectorAll('.btn, .hero-cta, .ext-icon').forEach((el) => magnetize(el));
 
 /* ---------- footer email: letters rise from the center ---------- */
-const mail = document.querySelector('.footer-mail');
-mail.innerHTML = [...mail.textContent]
-  .map((c) => `<span class="char" style="opacity:0">${c}</span>`)
-  .join('');
-const mailChars = mail.querySelectorAll('.char');
-new IntersectionObserver(
-  (entries, obs) => {
-    if (!entries[0].isIntersecting) return;
-    obs.disconnect();
-    animate(mailChars, {
-      opacity: [0, 1],
-      translateY: [30, 0],
-      duration: 850,
-      ease: 'outExpo',
-      delay: stagger(16, { from: 'center' }),
-    });
-  },
-  { threshold: 0.4 }
-).observe(mail);
+if (!REDUCED_MOTION) {
+  const mail = document.querySelector('.footer-mail');
+  mail.innerHTML = [...mail.textContent]
+    .map((c) => `<span class="char" style="opacity:0">${c}</span>`)
+    .join('');
+  const mailChars = mail.querySelectorAll('.char');
+  new IntersectionObserver(
+    (entries, obs) => {
+      if (!entries[0].isIntersecting) return;
+      obs.disconnect();
+      animate(mailChars, {
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 850,
+        ease: 'outExpo',
+        delay: stagger(16, { from: 'center' }),
+      });
+    },
+    { threshold: 0.4 }
+  ).observe(mail);
+}
 
 /* ---------- marquee: duplicate content so -50% loops seamlessly ---------- */
 const track = document.querySelector('.marquee-track');
 track.innerHTML += track.innerHTML;
 
 /* ---------- scroll reveals ---------- */
-const io = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      io.unobserve(entry.target);
-      animate(entry.target, {
-        opacity: [0, 1],
-        translateY: [36, 0],
-        duration: 900,
-        ease: 'outExpo',
-        // clear the inline transform so the CSS :hover lift on cards can take over
-        onComplete: () => (entry.target.style.transform = ''),
-      });
-    }
-  },
-  { threshold: 0.12 }
-);
-document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+if (!REDUCED_MOTION) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        io.unobserve(entry.target);
+        animate(entry.target, {
+          opacity: [0, 1],
+          translateY: [36, 0],
+          duration: 900,
+          ease: 'outExpo',
+          // clear the inline transform so the CSS :hover lift on cards can take over
+          onComplete: () => (entry.target.style.transform = ''),
+        });
+      }
+    },
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+}
 
 /* ---------- explain system ----------
    Any element with [data-explain] updates its card's explainer bar
@@ -181,18 +193,20 @@ document.addEventListener('click', (e) => {
   if (!el) return;
 
   // ping at click point
-  const ping = document.createElement('div');
-  ping.className = 'ping';
-  ping.style.left = `${e.clientX}px`;
-  ping.style.top = `${e.clientY}px`;
-  document.body.appendChild(ping);
-  animate(ping, {
-    scale: [0.4, 3.2],
-    opacity: [1, 0],
-    duration: 550,
-    ease: 'outExpo',
-    onComplete: () => ping.remove(),
-  });
+  if (!REDUCED_MOTION) {
+    const ping = document.createElement('div');
+    ping.className = 'ping';
+    ping.style.left = `${e.clientX}px`;
+    ping.style.top = `${e.clientY}px`;
+    document.body.appendChild(ping);
+    animate(ping, {
+      scale: [0.4, 3.2],
+      opacity: [1, 0],
+      duration: 550,
+      ease: 'outExpo',
+      onComplete: () => ping.remove(),
+    });
+  }
 
   // update the card's explain bar
   const card = el.closest('.card');
