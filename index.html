@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arhaan Khan — AI Engineer</title>
+  <meta name="description" content="Arhaan Khan — AI engineer building agentic systems, MCP servers and edge ML. Founder of Prompy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <a href="#top" class="nav-logo mono">AK<span class="accent">.</span></a>
+    <div class="nav-links mono">
+      <a href="#work">work</a>
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <p class="hero-kicker mono reveal-now">Gaya, Bihar — India&ensp;·&ensp;<span class="accent">●</span> open to work</p>
+    <h1 class="hero-title" aria-label="Arhaan Khan">
+      <span class="line"><span class="word" data-split>ARHAAN</span></span>
+      <span class="line"><span class="word" data-split>KHAN</span></span>
+    </h1>
+    <div class="hero-sub">
+      <p class="hero-role reveal-now">Building with <em>generative AI</em> &amp; shipping it on the <em>cloud</em>.
+      Founder of <a class="link" href="https://prompy.in" target="_blank" rel="noreferrer">Prompy</a>.</p>
+      <a class="hero-cta mono reveal-now" href="#work">see the work <span class="arrow">↓</span></a>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track mono">
+        <span>Python</span><span>·</span><span>C++</span><span>·</span><span>Swift</span><span>·</span>
+        <span>LangChain</span><span>·</span><span>MCP</span><span>·</span><span>RAG</span><span>·</span>
+        <span>FastAPI</span><span>·</span><span>React</span><span>·</span><span>Docker</span><span>·</span>
+        <span>ROS</span><span>·</span><span>Gazebo</span><span>·</span><span>AirSim</span><span>·</span>
+        <span>Hugging&nbsp;Face</span><span>·</span><span>Edge&nbsp;ML</span><span>·</span><span>HIL&nbsp;Sim</span><span>·</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ WORK ============ -->
+    <section class="section" id="work">
+      <div class="section-head reveal">
+        <span class="mono muted">01 — selected work</span>
+        <p class="section-hint mono"><span class="accent">▲</span> these demos are alive — click any button, field or file inside them and it tells you what it does in the real project</p>
+      </div>
+
+      <!-- ── PROMPY (featured) ── -->
+      <article class="card card-wide reveal" id="demo-prompy">
+        <div class="card-meta">
+          <h3>Prompy <span class="tag mono">founder · 2026—now</span></h3>
+          <p>AI prompt optimizer that rewrites rough drafts into structured prompts, right inside the browser. Shipped as a Chrome extension. Live at <a class="link" href="https://prompy.in" target="_blank" rel="noreferrer">prompy.in</a>.</p>
+        </div>
+        <div class="demo browser">
+          <div class="browser-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="urlbar mono" data-explain="Prompy runs at prompy.in — the platform and its docs are maintained there.">prompy.in</span>
+            <button class="ext-icon" data-explain="The Chrome extension icon — Prompy injects itself into any site so you can optimize prompts without leaving the page." aria-label="extension">✦</button>
+          </div>
+          <div class="browser-body">
+            <div class="prompt-pane">
+              <label class="mono muted">your rough draft</label>
+              <div class="prompt-in mono" id="prompy-input" data-explain="You paste any messy, half-formed prompt here — Prompy doesn't need it to be well written, that's the point.">make me a landing page for my fitness app, make it good and modern pls</div>
+              <button class="btn btn-accent" id="prompy-run" data-explain="The core of Prompy: one click sends your draft through the optimizer engine, which restructures it into role, task, context and format.">✦ Optimize</button>
+            </div>
+            <div class="prompt-pane">
+              <label class="mono muted">optimized</label>
+              <pre class="prompt-out mono" id="prompy-output" data-explain="The structured result — ready to paste into any AI chat. In the extension this appears inline, in the page you're already on."><span class="muted">// hit optimize…</span></pre>
+            </div>
+          </div>
+        </div>
+        <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">click any control in this demo ↑</span></div>
+      </article>
+
+      <div class="grid">
+        <!-- ── FILE ANALYZER MCP ── -->
+        <article class="card reveal" id="demo-mcp">
+          <div class="card-meta">
+            <h3>File Analyzer MCP <a class="gh mono" href="https://github.com/ArhaanDev24/file-analyzer-mcp" target="_blank" rel="noreferrer">github ↗</a></h3>
+            <p>A Model Context Protocol server that lets AI assistants like Claude read, parse and analyze local files through a standardized tool interface.</p>
+          </div>
+          <div class="demo term">
+            <div class="term-files">
+              <button class="file mono" data-file="invoice.pdf" data-explain="Clicking a file fires the MCP read_file tool — the server extracts structured content from the PDF and hands it to the LLM client.">▤ invoice.pdf</button>
+              <button class="file mono" data-file="dataset.csv" data-explain="CSV files get parsed into rows and columns the assistant can reason over — no copy-pasting into chat.">▦ dataset.csv</button>
+              <button class="file mono" data-file="notes.md" data-explain="Markdown is parsed with structure intact, so the assistant sees headings and lists — not a blob of text.">▧ notes.md</button>
+            </div>
+            <div class="term-log mono" id="mcp-log"><span class="muted">// select a file — the MCP tool call runs here</span></div>
+          </div>
+          <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">click a file ↑</span></div>
+        </article>
+
+        <!-- ── PCB ION ── -->
+        <article class="card reveal" id="demo-pcb">
+          <div class="card-meta">
+            <h3>PCB ION <a class="gh mono" href="https://github.com/ArhaanDev24/PCB-ION" target="_blank" rel="noreferrer">github ↗</a></h3>
+            <p>AI PCB design tool — describe a circuit in plain English and it places components, guides connections and runs basic simulation in the browser.</p>
+          </div>
+          <div class="demo pcb">
+            <div class="pcb-prompt">
+              <span class="mono pcb-nl" data-explain="This is the whole interface of PCB ION: natural language in, circuit layout out. No manual placement grind.">"connect the MCU to the temp sensor over I2C"</span>
+              <button class="btn btn-accent mono" id="pcb-run" data-explain="Generate parses the sentence with NLP, picks the parts, places them on the board and routes the traces — what you'd normally do by hand for rapid prototyping.">generate</button>
+            </div>
+            <div class="pcb-board" id="pcb-board">
+              <svg class="pcb-traces" id="pcb-traces" viewBox="0 0 300 150" preserveAspectRatio="none"></svg>
+              <div class="chip" id="chip-mcu" data-explain="Auto-placed component. In PCB ION you can still drag parts — the AI placement is a starting point, not a cage." style="left:12%;top:32%">MCU</div>
+              <div class="chip" id="chip-sns" data-explain="The sensor the NLP step identified from 'temp sensor' — matched from the component library." style="left:70%;top:56%">SNS</div>
+              <button class="btn btn-ghost mono pcb-sim" id="pcb-sim" data-explain="Runs a basic circuit simulation on the generated layout, so you catch wiring mistakes before export.">▶ simulate</button>
+            </div>
+          </div>
+          <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">try generate ↑</span></div>
+        </article>
+
+        <!-- ── NEUROOPS ── -->
+        <article class="card reveal" id="demo-neuro">
+          <div class="card-meta">
+            <h3>NeuroOps <a class="gh mono" href="https://github.com/ArhaanDev24/neuroops" target="_blank" rel="noreferrer">github ↗</a></h3>
+            <p>Lightweight AI task orchestration engine, with memory allocation tuned to keep latency low under high-load edge conditions.</p>
+          </div>
+          <div class="demo neuro">
+            <div class="neuro-top">
+              <button class="btn btn-accent mono" id="neuro-dispatch" data-explain="Dispatches a task into the engine — the scheduler decides which worker takes it based on current load.">+ dispatch task</button>
+              <button class="btn btn-ghost mono" id="neuro-spike" data-explain="Simulates a high-load edge condition. This is where the optimized memory allocation earns its keep — watch the latency.">⚡ load spike</button>
+              <span class="neuro-latency mono" id="neuro-latency" data-explain="Live scheduling latency. NeuroOps' memory tuning keeps this low even when the queue floods.">— <b>12</b>ms</span>
+            </div>
+            <div class="neuro-lanes" id="neuro-lanes">
+              <div class="lane" data-explain="A worker lane. Tasks are balanced across workers instead of piling onto one."><span class="mono muted">w0</span></div>
+              <div class="lane" data-explain="A worker lane. Tasks are balanced across workers instead of piling onto one."><span class="mono muted">w1</span></div>
+              <div class="lane" data-explain="A worker lane. Tasks are balanced across workers instead of piling onto one."><span class="mono muted">w2</span></div>
+            </div>
+          </div>
+          <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">dispatch something ↑</span></div>
+        </article>
+
+        <!-- ── SPACECRAFT HIL ── -->
+        <article class="card reveal" id="demo-hil">
+          <div class="card-meta">
+            <h3>Spacecraft HIL Simulation <a class="gh mono" href="https://github.com/ArhaanDev24/Spacecraft_HIL_Simulation" target="_blank" rel="noreferrer">github ↗</a></h3>
+            <p>Hardware-in-the-loop rig wiring real avionics hardware into simulation, with automated firmware issue detection to shorten debugging cycles.</p>
+          </div>
+          <div class="demo hil">
+            <div class="hil-gauges">
+              <div class="gauge" data-explain="Live telemetry from the avionics hardware, streamed into the simulation loop in real time."><div class="gauge-fill" id="g1"></div><span class="mono muted">pwr</span></div>
+              <div class="gauge" data-explain="Live telemetry from the avionics hardware, streamed into the simulation loop in real time."><div class="gauge-fill" id="g2"></div><span class="mono muted">imu</span></div>
+              <div class="gauge" data-explain="Live telemetry from the avionics hardware, streamed into the simulation loop in real time."><div class="gauge-fill" id="g3"></div><span class="mono muted">rf</span></div>
+            </div>
+            <div class="hil-side">
+              <button class="btn btn-accent mono" id="hil-fault" data-explain="Injects a fault into the loop — exactly how you stress-test firmware before it flies. Watch the watchdog catch it.">☄ inject fault</button>
+              <div class="hil-log mono" id="hil-log"><span class="muted">// watchdog armed</span></div>
+            </div>
+          </div>
+          <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">inject a fault ↑</span></div>
+        </article>
+
+        <!-- ── ECOLENS ── -->
+        <article class="card reveal" id="demo-eco">
+          <div class="card-meta">
+            <h3>EcoLens <a class="gh mono" href="https://github.com/ArhaanDev24/EcoLens" target="_blank" rel="noreferrer">github ↗</a></h3>
+            <p>AI-powered recycling app: on-device image classification for real-time object detection, with a camera interface for instant feedback.</p>
+          </div>
+          <div class="demo eco">
+            <div class="phone">
+              <div class="phone-cam" id="eco-cam" data-explain="The live camera view. Classification happens on-device — no photo ever leaves the phone, and it works offline.">
+                <span class="eco-item" id="eco-item">🧴</span>
+                <div class="scanline" id="eco-scan"></div>
+              </div>
+              <div class="eco-result mono" id="eco-result">&nbsp;</div>
+              <div class="eco-controls">
+                <button class="btn btn-accent mono" id="eco-scan-btn" data-explain="Runs the on-device model — a lightweight CNN doing real-time object detection, small enough to run at camera framerate.">◉ scan</button>
+                <button class="btn btn-ghost mono" id="eco-next" data-explain="Cycle test items — each maps to a different disposal category the classifier was trained on.">next item →</button>
+              </div>
+            </div>
+          </div>
+          <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">scan the bottle ↑</span></div>
+        </article>
+
+        <!-- ── JIRA FORGE ── -->
+        <article class="card reveal" id="demo-jira">
+          <div class="card-meta">
+            <h3>Jira Issue Panel <span class="tag mono">Atlassian Forge Quest</span></h3>
+            <p>An issue-panel app built on Atlassian's Forge serverless platform — users input and persist data directly inside a Jira issue via the Forge Storage API.</p>
+          </div>
+          <div class="demo jira">
+            <div class="jira-head mono" data-explain="The app renders inside a real Jira issue as a panel — no separate site, it lives where the work is.">
+              <span class="jira-key accent">PROJ-42</span> Fix login timeout on mobile
+            </div>
+            <table class="jira-table mono" id="jira-table" data-explain="A dynamic table backed by the Forge Storage API — rows survive reloads because they're persisted server-side (serverless-side, technically).">
+              <thead><tr><th>note</th><th>status</th></tr></thead>
+              <tbody>
+                <tr><td>Repro on iOS 26</td><td><span class="pill">done</span></td></tr>
+                <tr><td>Token TTL too short</td><td><span class="pill">open</span></td></tr>
+              </tbody>
+            </table>
+            <div class="jira-add">
+              <input class="jira-input mono" id="jira-input" placeholder="add a note…" data-explain="Type anything — on save it's written through Forge's Storage API and re-rendered in the dynamic table." />
+              <button class="btn btn-accent mono" id="jira-save" data-explain="Persists the row via the Forge Storage API — the whole backend is Forge serverless functions, zero infra to run.">save</button>
+            </div>
+            <div class="jira-saved mono accent" id="jira-saved">✓ saved to Forge Storage</div>
+          </div>
+          <div class="explain-bar mono"><span class="explain-label accent">explainer</span><span class="explain-text">add a row ↑</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="section-head reveal"><span class="mono muted">02 — about</span></div>
+      <div class="about reveal">
+        <p class="about-big">I'm all about <span class="accent">cloud computing &amp; generative AI</span> — studying it, building with it, shipping it. I like taking an idea, wiring it up with the right cloud infrastructure, and turning it into a product people can actually use.</p>
+        <div class="about-cols">
+          <div>
+            <h4 class="mono muted">languages</h4>
+            <p>Python · C++ · Swift</p>
+          </div>
+          <div>
+            <h4 class="mono muted">tools</h4>
+            <p>FastAPI · React · Docker · Git · Hugging Face · LangChain · ROS · Gazebo</p>
+          </div>
+          <div>
+            <h4 class="mono muted">focus</h4>
+            <p>Cloud deployment · containerization · generative AI · REST APIs · real-time data processing · building products end to end</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section" id="experience">
+      <div class="section-head reveal"><span class="mono muted">03 — experience &amp; education</span></div>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <span class="t-when mono muted">2026 — present</span>
+          <div>
+            <h3>Founder &amp; Developer — Prompy</h3>
+            <p>Built and shipped an AI prompt optimizer as a Chrome extension; maintain the platform and docs at prompy.in.</p>
+          </div>
+        </div>
+        <div class="t-item reveal">
+          <span class="t-when mono muted">2026 — 2030</span>
+          <div>
+            <h3>B.Tech, Cloud Computing &amp; Generative AI</h3>
+            <p>Lovely Professional University</p>
+          </div>
+        </div>
+        <div class="t-item reveal">
+          <span class="t-when mono muted">certs</span>
+          <div>
+            <h3>Certifications</h3>
+            <p>Anthropic — <a class="link" href="https://verify.skilljar.com/c/tigpjg75h34j" target="_blank" rel="noreferrer">Claude 101</a> · <a class="link" href="https://verify.skilljar.com/c/3h38ftdinc3w" target="_blank" rel="noreferrer">Claude Code 101</a> · <a class="link" href="https://verify.skilljar.com/c/48gzca9qdkdy" target="_blank" rel="noreferrer">Claude Platform 101</a><br/>IBM — Cloud Essentials · Introduction to Cloud<br/>NASA Open Science — Open Science 101 · Open Science Essentials</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <footer class="footer" id="contact">
+      <span class="mono muted reveal">04 — say hi</span>
+      <a class="footer-mail reveal" href="mailto:arhaankhan7b@gmail.com" data-split-footer>arhaankhan7b@gmail.com</a>
+      <div class="footer-links mono reveal">
+        <a class="link" href="https://github.com/ArhaanDev24" target="_blank" rel="noreferrer">github</a>
+        <a class="link" href="https://linkedin.com/in/arhaan-khan-6214b4401" target="_blank" rel="noreferrer">linkedin</a>
+        <a class="link" href="tel:+919955116304">+91 99551 16304</a>
+      </div>
+      <p class="mono muted footer-note">© 2026 Arhaan Khan — built with anime.js, obviously.</p>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
